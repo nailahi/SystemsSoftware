@@ -1,0 +1,12 @@
+In constructor
+In input value 2
+in constructor
+in input_value 100
+in constructor
+in input_value 500
+Variable is even
+variable is 100
+in destructor 500
+in destructor 100
+in destructor 2d
+d

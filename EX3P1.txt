@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<pthread.h>
+
+pthread_t tid[2];
+unsigned int shared_data = 0;
+pthread_mutex_t mutex;
+unsigned int rc;
+int numbers[10]= {5,4,1,10,20,25,15,19,12,7};
+
+
+
+void* PrintOddNos(void*);
+
+void main(void)
+{
+    pthread_create(&tid[1],0,&PrintOddNos,0);
+    sleep(3);
+
+    pthread_join(tid[0],NULL);
+    pthread_join(tid[1],NULL);
+}
+
+
+
+void* PrintOddNos(void* ptr1)
+{
+    rc = pthread_mutex_lock(&mutex);
+    int i=0;
+    do
+    {
+        if(numbers[i]%2 != 0)
+        {
+            printf("odd:%d\n",numbers[i]);
+            i++;
+        }
+        else
+        {
+            rc = pthread_mutex_unlock(&mutex);
+        }
+    } while (i <= 10);
+}
